@@ -16,6 +16,11 @@ class Client {
             $options = array(
                 'timeout' => 120
             ); 
+
+            // TODO: We change to string to avoid the precision bug on PHP 7.1
+            // URL : https://bugs.php.net/bug.php?id=72567
+            if( is_array( $data ) && isset( $data['amount'] ) )
+                $data['amount'] = strval( $data['amount'] );
             
             // Check URL
             if($secure_url) $base_url = Culqi::SECURE_BASE_URL;
